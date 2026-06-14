@@ -10,7 +10,7 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      Dashboard
+      Welcome {session.user?.name}
     </div>
   );
 }
