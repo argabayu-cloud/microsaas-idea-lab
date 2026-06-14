@@ -7,35 +7,57 @@ export async function POST(req: Request) {
 
     const { name, email, password } = body;
 
-    const existingUser =
-      await prisma.user.findUnique({
-        where: { email },
-      });
-
-    if (existingUser) {
+    if (!name || !email || !password) {
       return Response.json(
-        { error: "Email already exists" },
+        { message: "All fields are required" },
         { status: 400 }
       );
     }
 
-    const hashedPassword =
-      await bcrypt.hash(password, 10);
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
 
-    const user =
-      await prisma.user.create({
-        data: {
-          name,
-          email,
-          password: hashedPassword,
-        },
-      });
+    if (existingUser) {
+      return Response.json(
+        { message: "Email already exists" },
+        { status: 400 }
+      );
+    }
 
-    return Response.json(user);
-  } catch {
+    const hashedPassword = await bcrypt.hash(
+      password,
+      10
+    );
+
+    await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
+    });
+
     return Response.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
+      {
+        success: true,
+      },
+      {
+        status: 201,
+      }
+    );
+  } catch (error) {
+    console.error(error);
+
+    return Response.json(
+      {
+        message: "Internal Server Error",
+      },
+      {
+        status: 500,
+      }
     );
   }
 }
