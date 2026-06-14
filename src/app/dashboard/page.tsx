@@ -1,16 +1,13 @@
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
-
-export default async function DashboardPage() {
-  const session = await auth();
-
-  if (!session) {
-    redirect("/login");
-  }
-
+export default function DashboardPage() {
   return (
-    <div>
-      Welcome {session.user?.name}
+    <div className="p-8">
+      <h1 className="text-3xl font-bold">
+        Dashboard
+      </h1>
+
+      <p className="mt-2">
+        Login berhasil 🎉
+      </p>
     </div>
   );
 }
