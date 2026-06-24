@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Idea Lab | Idea Detail View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #334155;
+        }
+        .ai-result-card {
+            background: rgba(34, 211, 238, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid #334155;
+            border-top: 2px solid #22D3EE;
+        }
+        .roadmap-line {
+            background-image: linear-gradient(to bottom, #334155 50%, transparent 50%);
+            background-size: 2px 8px;
+            background-repeat: repeat-y;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F172A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #22D3EE;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#e4e2e3",
+                        "vibrant-cyan": "#22D3EE",
+                        "tertiary-fixed-dim": "#ddc39d",
+                        "secondary": "#6bd8cb",
+                        "on-secondary-fixed": "#00201d",
+                        "tertiary-fixed": "#fadfb8",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "surface": "#131315",
+                        "surface-container-high": "#2a2a2b",
+                        "on-tertiary-fixed-variant": "#564427",
+                        "outline": "#8f9097",
+                        "background": "#131315",
+                        "on-secondary-fixed-variant": "#005049",
+                        "surface-dim": "#131315",
+                        "border-muted": "#334155",
+                        "tertiary-container": "#35260c",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#353536",
+                        "surface-bright": "#39393a",
+                        "on-secondary-container": "#00302b",
+                        "on-background": "#e4e2e3",
+                        "on-tertiary": "#3e2e13",
+                        "surface-container-low": "#1b1b1d",
+                        "ai-glow": "rgba(34, 211, 238, 0.15)",
+                        "surface-variant": "#353536",
+                        "primary-fixed-dim": "#bcc7de",
+                        "inverse-primary": "#545f73",
+                        "on-primary-fixed": "#111c2d",
+                        "outline-variant": "#45474c",
+                        "on-tertiary-container": "#a38c6a",
+                        "secondary-container": "#29a195",
+                        "error-container": "#93000a",
+                        "primary-container": "#1e293b",
+                        "secondary-fixed": "#89f5e7",
+                        "inverse-on-surface": "#303032",
+                        "on-primary": "#263143",
+                        "on-tertiary-fixed": "#271902",
+                        "surface-container-lowest": "#0e0e0f",
+                        "surface-tint": "#bcc7de",
+                        "slate-surface": "#0F172A",
+                        "on-surface-variant": "#c5c6cd",
+                        "primary": "#bcc7de",
+                        "on-primary-fixed-variant": "#3c475a",
+                        "deep-indigo": "#312E81",
+                        "surface-container": "#1f1f21",
+                        "on-primary-container": "#8590a6",
+                        "on-surface": "#e4e2e3",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ddc39d",
+                        "primary-fixed": "#d8e3fb",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#003732"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "base-unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-code": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-code": ["13px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-slate-surface text-on-surface font-body-md selection:bg-vibrant-cyan selection:text-slate-surface">
+<!-- SideNavBar Integration -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-surface border-r border-border-muted flex flex-col py-margin-desktop px-4 space-y-4 z-40">
+<div class="mb-8 px-2">
+<h1 class="font-display-lg text-headline-lg-mobile text-vibrant-cyan">Idea Lab</h1>
+<p class="text-on-surface-variant font-body-sm mt-1">Pro Plan</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-all text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-all bg-primary-container text-vibrant-cyan border-r-4 border-vibrant-cyan" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-body-sm">Generator</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-all text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-body-sm">Saved Ideas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-all text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-sm">Settings</span>
+</a>
+</nav>
+<button class="w-full bg-deep-indigo text-white py-3 font-body-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Idea
+        </button>
+<div class="pt-4 border-t border-border-muted space-y-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-all text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-sm">Help</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-all text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen relative">
+<!-- Floating Header / Progress -->
+<header class="sticky top-0 z-30 bg-slate-surface/80 backdrop-blur-xl border-b border-border-muted h-16 flex items-center justify-between px-margin-desktop">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-vibrant-cyan" data-icon="bolt">bolt</span>
+<h2 class="font-display-lg text-headline-lg-mobile tracking-tight">Project: DevFlow Pro</h2>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-4 py-2 border border-border-muted hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+<span class="font-body-sm">Export</span>
+</button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="max-w-container-max mx-auto px-margin-desktop py-12 pb-32">
+<!-- Section 1: Executive Summary (Bento Style) -->
+<section class="mb-16 grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-8 ai-result-card p-8 flex flex-col justify-center relative overflow-hidden">
+
+<div class="relative z-10">
+<span class="inline-block px-3 py-1 bg-vibrant-cyan/10 text-vibrant-cyan text-[10px] font-bold tracking-widest uppercase mb-4">Executive Summary</span>
+<h3 class="font-display-lg text-headline-lg mb-4">DevFlow Pro</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-6">
+                            An automated micro-SaaS framework that leverages AI to generate, deploy, and monitor specialized developer internal tools based on simple natural language prompts. It bridges the gap between raw idea and production-ready operational dashboard.
+                        </p>
+<div class="flex gap-8 border-t border-border-muted pt-6">
+<div>
+<p class="text-[10px] uppercase tracking-wider text-outline mb-1">Value Proposition</p>
+<p class="font-bold text-vibrant-cyan">10x Engineering Velocity</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-wider text-outline mb-1">Primary Users</p>
+<p class="font-bold">Indie Hackers &amp; Tech Leads</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 glass-panel p-8 flex items-center justify-center">
+<img alt="Abstract digital visualization" class="w-full h-full object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-700" data-alt="A sophisticated 3D isometric digital visualization of a modular software architecture with glowing blue and cyan pathways connecting translucent geometric blocks. The scene is set in a dark, high-tech laboratory environment with cinematic, cool-toned atmospheric lighting. Sharp edges and a minimalist aesthetic reflect a modern, engineering-focused design system with neon accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZJjd9_WAAATsGr1kADILK5YkdIHPkYUsXgu0Aot9yxxdXxO2Z52cQ7zZIN3tA51zhRhqEtQlQAuBj4MVFIttU7NCpGGu5DoTETeG1eUzKiyfXIpQd92EIqjxvBRw6YU8LTbMT87rvpVJp7kOu_B9vRRwNAg8VpYLH5l-6BADOezzx6rOACaZtiidpz2gsiikAb3UqPCKrhhcg8hZrZqCxcxedU2VbQ1VE5gtzRZiBEGnA4z1S1a9P67bI7ybzqz1z8ikU3zAA3pXK"/>
+</div>
+</section>
+<!-- Section 2: Market Potential -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-8">
+<h4 class="font-display-lg text-headline-lg">Market Potential</h4>
+<div class="h-px flex-1 bg-border-muted"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Score Card -->
+<div class="glass-panel p-6 flex flex-col items-center text-center">
+<div class="relative w-32 h-32 flex items-center justify-center mb-4">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="45" stroke="#334155" stroke-width="8"></circle>
+<circle cx="50" cy="50" fill="transparent" r="45" stroke="#22D3EE" stroke-dasharray="282.7" stroke-dashoffset="42.4" stroke-linecap="butt" stroke-width="8"></circle>
+</svg>
+<span class="absolute font-display-lg text-headline-lg">85</span>
+</div>
+<p class="font-bold">Viability Score</p>
+<p class="text-body-sm text-outline mt-2">Strong product-market fit potential in the developer productivity space.</p>
+</div>
+<!-- Competition -->
+<div class="glass-panel p-6">
+<h5 class="text-vibrant-cyan font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+                            Competitive Landscape
+                        </h5>
+<ul class="space-y-3">
+<li class="flex justify-between text-body-sm">
+<span>Retool</span>
+<span class="text-outline">High Threat</span>
+</li>
+<li class="flex justify-between text-body-sm">
+<span>Bubble</span>
+<span class="text-outline">Moderate</span>
+</li>
+<li class="flex justify-between text-body-sm">
+<span>Internal.io</span>
+<span class="text-outline">Legacy</span>
+</li>
+</ul>
+</div>
+<!-- Challenges -->
+<div class="glass-panel p-6">
+<h5 class="text-error font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+                            Key Challenges
+                        </h5>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="w-1 h-10 bg-error flex-shrink-0"></div>
+<p class="text-body-sm">Integration with legacy databases requires custom connectors.</p>
+</div>
+<div class="flex gap-3">
+<div class="w-1 h-10 bg-error flex-shrink-0"></div>
+<p class="text-body-sm">High initial security compliance barrier for enterprise users.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: MVP Features -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-8">
+<h4 class="font-display-lg text-headline-lg">MVP Strategy</h4>
+<div class="h-px flex-1 bg-border-muted"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<div class="ai-result-card p-8">
+<h5 class="font-bold text-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-vibrant-cyan" data-icon="star" data-weight="fill">star</span>
+                            Core Features (P0)
+                        </h5>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-vibrant-cyan/20 flex items-center justify-center flex-shrink-0">
+<span class="text-[12px] font-bold text-vibrant-cyan">01</span>
+</div>
+<div>
+<h6 class="font-bold">AI Dashboard Builder</h6>
+<p class="text-body-sm text-on-surface-variant">Natural language to React/Tailwind component generator with pre-built UI primitives.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-vibrant-cyan/20 flex items-center justify-center flex-shrink-0">
+<span class="text-[12px] font-bold text-vibrant-cyan">02</span>
+</div>
+<div>
+<h6 class="font-bold">One-Click Vercel Deploy</h6>
+<p class="text-body-sm text-on-surface-variant">Automated CI/CD pipeline integration to push generated tools to production instantly.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-panel p-8">
+<h5 class="font-bold text-lg mb-6 text-outline">Nice-to-have (Backlog)</h5>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 p-3 bg-surface-container-low border border-border-muted">
+<span class="material-symbols-outlined text-outline" data-icon="check_box_outline_blank">check_box_outline_blank</span>
+<span class="text-body-sm">Custom Domain Mapping</span>
+</li>
+<li class="flex items-center gap-3 p-3 bg-surface-container-low border border-border-muted">
+<span class="material-symbols-outlined text-outline" data-icon="check_box_outline_blank">check_box_outline_blank</span>
+<span class="text-body-sm">Real-time Analytics Dashboard</span>
+</li>
+<li class="flex items-center gap-3 p-3 bg-surface-container-low border border-border-muted">
+<span class="material-symbols-outlined text-outline" data-icon="check_box_outline_blank">check_box_outline_blank</span>
+<span class="text-body-sm">Team Collaboration Permissions</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Section 4: Tech Stack -->
+<section class="mb-16">
+<div class="flex items-center gap-4 mb-8">
+<h4 class="font-display-lg text-headline-lg">Technical Blueprint</h4>
+<div class="h-px flex-1 bg-border-muted"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 border border-border-muted bg-surface-container-low">
+<p class="text-[10px] uppercase tracking-widest text-vibrant-cyan mb-3">Frontend</p>
+<div class="space-y-2">
+<code class="block font-label-code text-label-code text-on-surface-variant">Next.js 14 (App Router)</code>
+<code class="block font-label-code text-label-code text-on-surface-variant">Tailwind CSS v3.4</code>
+<code class="block font-label-code text-label-code text-on-surface-variant">Framer Motion</code>
+</div>
+</div>
+<div class="p-6 border border-border-muted bg-surface-container-low">
+<p class="text-[10px] uppercase tracking-widest text-vibrant-cyan mb-3">Backend</p>
+<div class="space-y-2">
+<code class="block font-label-code text-label-code text-on-surface-variant">Node.js / Express</code>
+<code class="block font-label-code text-label-code text-on-surface-variant">Python (AI Microservice)</code>
+<code class="block font-label-code text-label-code text-on-surface-variant">LangChain</code>
+</div>
+</div>
+<div class="p-6 border border-border-muted bg-surface-container-low">
+<p class="text-[10px] uppercase tracking-widest text-vibrant-cyan mb-3">Infrastructure</p>
+<div class="space-y-2">
+<code class="block font-label-code text-label-code text-on-surface-variant">Supabase (PostgreSQL)</code>
+<code class="block font-label-code text-label-code text-on-surface-variant">Redis (Caching)</code>
+<code class="block font-label-code text-label-code text-on-surface-variant">AWS Lambda</code>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: 4-Week Roadmap -->
+<section class="mb-16 relative">
+<div class="flex items-center gap-4 mb-12">
+<h4 class="font-display-lg text-headline-lg">Development Roadmap</h4>
+<div class="h-px flex-1 bg-border-muted"></div>
+</div>
+<div class="relative">
+<div class="absolute left-8 top-0 bottom-0 w-0.5 roadmap-line"></div>
+<div class="space-y-12">
+<!-- Week 1 -->
+<div class="relative flex gap-12 group">
+<div class="w-16 h-16 rounded-full bg-vibrant-cyan flex items-center justify-center z-10 ring-8 ring-slate-surface group-hover:scale-110 transition-transform">
+<span class="font-display-lg text-headline-lg-mobile text-slate-surface">01</span>
+</div>
+<div class="flex-1 glass-panel p-6 border-l-4 border-l-vibrant-cyan">
+<h6 class="font-bold text-lg mb-2">Foundation &amp; Auth</h6>
+<p class="text-body-sm text-on-surface-variant">Setup base Next.js project, database schema, and core authentication flows. Initial prompt-to-JSON parsing engine.</p>
+</div>
+</div>
+<!-- Week 2 -->
+<div class="relative flex gap-12 group">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest border-2 border-vibrant-cyan flex items-center justify-center z-10 ring-8 ring-slate-surface group-hover:scale-110 transition-transform">
+<span class="font-display-lg text-headline-lg-mobile text-vibrant-cyan">02</span>
+</div>
+<div class="flex-1 glass-panel p-6 border-l-4 border-l-border-muted">
+<h6 class="font-bold text-lg mb-2">AI Generation Engine</h6>
+<p class="text-body-sm text-on-surface-variant">Integration with GPT-4 to convert user prompts into functional React components. Dynamic data mapping to simulated APIs.</p>
+</div>
+</div>
+<!-- Week 3 -->
+<div class="relative flex gap-12 group">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest border-2 border-border-muted flex items-center justify-center z-10 ring-8 ring-slate-surface">
+<span class="font-display-lg text-headline-lg-mobile text-on-surface-variant">03</span>
+</div>
+<div class="flex-1 glass-panel p-6 border-l-4 border-l-border-muted opacity-60">
+<h6 class="font-bold text-lg mb-2">Deployment Pipeline</h6>
+<p class="text-body-sm text-on-surface-variant">Automated deployment triggers for Vercel/Netlify. Security layer implementation for API key management.</p>
+</div>
+</div>
+<!-- Week 4 -->
+<div class="relative flex gap-12 group">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest border-2 border-border-muted flex items-center justify-center z-10 ring-8 ring-slate-surface">
+<span class="font-display-lg text-headline-lg-mobile text-on-surface-variant">04</span>
+</div>
+<div class="flex-1 glass-panel p-6 border-l-4 border-l-border-muted opacity-60">
+<h6 class="font-bold text-lg mb-2">Beta Launch &amp; Feedback</h6>
+<p class="text-body-sm text-on-surface-variant">Initial alpha user rollout. Analytics tracking for feature usage and iterative improvement on generated UI patterns.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Floating Action Button -->
+<button class="fixed bottom-8 right-8 bg-vibrant-cyan text-slate-surface px-6 py-4 rounded-full font-bold shadow-xl shadow-vibrant-cyan/20 flex items-center gap-3 group hover:scale-105 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined" data-icon="bookmark" data-weight="fill">bookmark</span>
+            Save to Dashboard
+        </button>
+</main>
+<script>
+        // Smooth scroll interaction for roadmap
+        document.addEventListener('DOMContentLoaded', () => {
+            const roadmapItems = document.querySelectorAll('.group');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100');
+                        entry.target.classList.remove('translate-y-4');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            roadmapItems.forEach(item => {
+                item.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+                observer.observe(item);
+            });
+        });
+
+        // Hover illumination effect for glass panels
+        const glassPanels = document.querySelectorAll('.glass-panel, .ai-result-card');
+        glassPanels.forEach(panel => {
+            panel.addEventListener('mousemove', e => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                panel.style.setProperty('--mouse-x', `${x}px`);
+                panel.style.setProperty('--mouse-y', `${y}px`);
+                panel.style.backgroundImage = `radial-gradient(400px circle at ${x}px ${y}px, rgba(34, 211, 238, 0.1), transparent)`;
+            });
+            panel.addEventListener('mouseleave', () => {
+                panel.style.backgroundImage = 'none';
+            });
+        });
+    </script>
+</body></html>
